@@ -57,7 +57,8 @@ I18N_SUBSITES = {
             'LOCALE': 'pt_BR.utf8',            #This is somewhat redundant with DATE_FORMATS, but IMHO more convenient
             'STATIC_PATHS':['images'],
             'ABOUT_ME': '''Eu sou uma pessoa curiosa com formação multidisciplinar, interessado em resolver problemas e melhorar a vida. Utilizado de técnicas analíticas, computacionais, inteligência artificial (principalmente com o uso de dados) para encontrar uma solução. Eu gosto de ciência e atividades estimulantes (tanto do ponto de vista físico como intelectual). Procuro desenvolvimento pessoal, valorizo saúde e tento seguir um estilo de vida saudável.''',
-            'AVATAR': 'images/profile.jpg'
+            'AVATAR': 'images/profile.jpg',
+            'SHARIFF_LANG': 'pt'
             },
         }
 
@@ -72,6 +73,11 @@ ABOUT_ME = '''I am a curious person with multidisciplinary background,
 
 AVATAR = 'images/profile.jpg'
 
+#ADDTHIS_PROFILE = 'ra-5b580637490f03a8'
+SHARIFF = True
+SHARIFF_LANG = 'en'
+SHARIFF_ORIENTATION = 'horizontal'
+SHARIFF_SERVICES = '[&quot;whatsapp&quot;,&quot;facebook&quot;,&quot;linkedin&quot;,&quot;twitter&quot;,&quot;telegram&quot;,&quot;googleplus&quot;]'
 #HIDE_SIDEBAR = True
 
 DISPLAY_ARTICLE_INFO_ON_INDEX = True
