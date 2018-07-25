@@ -94,3 +94,15 @@ EXTRA_PATH_METADATA = {
         'path': '.nojekyll',
         },
     }
+
+languages_lookup = {
+             'en': 'English',
+             'pt': 'Site em português',
+             }
+
+def lookup_lang_name(lang_code):
+    return languages_lookup[lang_code]
+
+JINJA_FILTERS = {
+             'lookup_lang_name': lookup_lang_name,
+             }
