@@ -1,0 +1,21 @@
+name: rrr
+
+channels:
+- defaults
+- conda-forge
+
+dependencies:
+- anaconda
+- beautifulsoup4
+- flake8
+- ghp-import
+- ipython
+- jupyter
+- Markdown
+- matplotlib
+- nbconvert
+- numpy
+- pandas
+- pelican
+- pip
+- python>=3.5
