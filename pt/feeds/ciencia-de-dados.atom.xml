@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Razões &amp; Refleções Randômicas - Ciência de dados</title><link href="http://ojon.github.io/pt/" rel="alternate"></link><link href="http://ojon.github.io/feeds/ciencia-de-dados.atom.xml" rel="self"></link><id>http://ojon.github.io/pt/</id><updated>2018-07-23T16:00:00-03:00</updated><entry><title>Introdução a Ciência de Dados com uma Imagem Mnemônica</title><link href="http://ojon.github.io/pt/aboutDataScience.html" rel="alternate"></link><published>2018-07-23T16:00:00-03:00</published><updated>2018-07-23T16:00:00-03:00</updated><author><name>João Oda</name></author><id>tag:ojon.github.io,2018-07-23:/pt/aboutDataScience.html</id><summary type="html">&lt;!-- Summary: Whats is Data Science about. --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Razões &amp; Refleções Randômicas - Ciência de dados</title><link href="https://ojon.github.io/pt/" rel="alternate"></link><link href="https://ojon.github.io/feeds/ciencia-de-dados.atom.xml" rel="self"></link><id>https://ojon.github.io/pt/</id><updated>2018-07-23T16:00:00-03:00</updated><entry><title>Introdução a Ciência de Dados com uma Imagem Mnemônica</title><link href="https://ojon.github.io/pt/aboutDataScience.html" rel="alternate"></link><published>2018-07-23T16:00:00-03:00</published><updated>2018-07-23T16:00:00-03:00</updated><author><name>João Oda</name></author><id>tag:ojon.github.io,2018-07-23:/pt/aboutDataScience.html</id><summary type="html">&lt;!-- Summary: Whats is Data Science about. --&gt;
 
 &lt;p&gt;Outro dia eu encontrei um desenho(claramente inspirado no &lt;a href="https://pt.wikipedia.org/wiki/Mega_Man"&gt;megaman&lt;/a&gt;) curioso na web.&lt;/p&gt;
 &lt;figure width=600&gt;
@@ -39,7 +39,7 @@
 &lt;h2&gt;Habilidades&lt;/h2&gt;
 &lt;p&gt;A ciência de dados esta intimamente ligada ao fenômeno &lt;strong&gt;Big Data&lt;/strong&gt; (a quantidade muito maior de dados disponíveis atualmente). Para lidar com quantidades massivas de dados precisamos utilizar ferramentos computacionais guiadas por princípios matemáticos e estatísticos dentro do contexto do negócio que estamos tratando.&lt;/p&gt;
 &lt;p&gt;Agora eu tomei a liberdade de traduzir um infográfico original de &lt;a href="http://berkeleysciencereview.com/how-to-become-a-data-scientist-before-you-graduate/"&gt;berkeleysciencereview&lt;/a&gt; (no momento estou trabalhando no item 9 do link, "construa uma presença online").&lt;/p&gt;
-&lt;p&gt;&lt;img alt="infográfico" src="http://ojon.github.io/pt/../images/infograficoCienciaDeDados.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="infográfico" src="https://ojon.github.io/pt/../images/infograficoCienciaDeDados.jpg"&gt;&lt;/p&gt;
 &lt;!-- - Ciência de dados devido a sua natureza interdisciplinar, requer uma intersecção de habilidades: habilidades computacionais, conhecimento de matemática e estatística, e conhecimento do domínio.
 
 - Habilidades computacionais são necessárias para trabalhar com quantidades massivas de dados que precisam ser adquiridos, limpos e manipulados.
