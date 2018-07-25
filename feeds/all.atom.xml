@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Random Reasons &amp; Reflections</title><link href="http://ojon.github.io/" rel="alternate"></link><link href="http://ojon.github.io/feeds/all.atom.xml" rel="self"></link><id>http://ojon.github.io/</id><updated>2018-07-23T16:00:00-03:00</updated><entry><title>Introduction to Data Science with a Mnemonic Image</title><link href="http://ojon.github.io/aboutDataScience.html" rel="alternate"></link><published>2018-07-23T16:00:00-03:00</published><updated>2018-07-23T16:00:00-03:00</updated><author><name>João Oda</name></author><id>tag:ojon.github.io,2018-07-23:/aboutDataScience.html</id><summary type="html">&lt;!-- Summary: Whats is Data Science about. --&gt;
+
+&lt;p&gt;Another day I found on the web this curious drawing (clearly inspired on &lt;a href="https://en.wikipedia.org/wiki/Mega_Man"&gt;megaman&lt;/a&gt;).&lt;/p&gt;
+&lt;figure width=600&gt;
+  &lt;img src="https://pre00.deviantart.net/c0d7/th/pre/i/2010/134/e/5/rpn_005_dice_man_by_jecht_striker.jpg" alt="DiceMan" &gt;
+  &lt;figcaption style="text-align:right" &gt;drawing credits to VR-Hyoumaru&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Let's take a look at this picture and do some associations.&lt;/p&gt;
+&lt;p&gt;Dices are one the main symbols of &lt;strong&gt;probability theory&lt;/strong&gt;, a field of &lt;strong&gt;mathematics&lt;/strong&gt; that with many applications and that provides the …&lt;/p&gt;</summary><content type="html">&lt;!-- Summary: Whats is Data Science about. --&gt;
+
+&lt;p&gt;Another day I found on the web this curious drawing (clearly inspired on &lt;a href="https://en.wikipedia.org/wiki/Mega_Man"&gt;megaman&lt;/a&gt;).&lt;/p&gt;
+&lt;figure width=600&gt;
+  &lt;img src="https://pre00.deviantart.net/c0d7/th/pre/i/2010/134/e/5/rpn_005_dice_man_by_jecht_striker.jpg" alt="DiceMan" &gt;
+  &lt;figcaption style="text-align:right" &gt;drawing credits to VR-Hyoumaru&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Let's take a look at this picture and do some associations.&lt;/p&gt;
+&lt;p&gt;Dices are one the main symbols of &lt;strong&gt;probability theory&lt;/strong&gt;, a field of &lt;strong&gt;mathematics&lt;/strong&gt; that with many applications and that provides the foundations to &lt;strong&gt;statistics&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Here I will associate the robot with &lt;strong&gt;automation&lt;/strong&gt; and &lt;strong&gt;computation&lt;/strong&gt; (although other fields like mechatronics might come to your mind).&lt;/p&gt;
+&lt;p&gt;Let me add some extra piece of information. In Portuguese the word "dados" can mean &lt;strong&gt;data&lt;/strong&gt;, but it can also means dices.&lt;/p&gt;
+&lt;p&gt;Now imagine whatever our "data/dice man" mission is, it ll be in an &lt;strong&gt;environment&lt;/strong&gt;, a &lt;strong&gt;context&lt;/strong&gt; and the more he knows about it, better will be outcome.&lt;/p&gt;
+&lt;p&gt;I am about to introduce the field of &lt;strong&gt;Data Science&lt;/strong&gt; and maybe these associations and a mental picture will help you memorize the concept, a trick I find useful in many situations.&lt;/p&gt;
+&lt;h2&gt;What's Data Science About?&lt;/h2&gt;
+&lt;p&gt;In recent years the term &lt;strong&gt;Data Science&lt;/strong&gt; has emerged to nominate a interdisciplinary area of knowledge. Data scientists and other professionals of this area provides organizations with some form of analytics.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;strong&gt;descriptive analytics&lt;/strong&gt; can show some insights and point out hidden information, you need to analyze these and see how they can affect your business decisions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;strong&gt;predictive analytics&lt;/strong&gt; uses models to predict an outcome that extrapolates the information we have until now, in many cases is predict the future.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On &lt;strong&gt;prescriptive analytics&lt;/strong&gt; you careful select your optimization metric and you will use data to decide what actions take to maximize your metric.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In Summary for me Data Science is about &lt;strong&gt;obtain value from data&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;Skills&lt;/h2&gt;
+&lt;p&gt;Data science is closely related with &lt;em&gt;Big Data&lt;/em&gt; phenomena. To deal with massive amounts of data we need to employ computational tools guided by statistical and math principles with in a business context.&lt;/p&gt;
+&lt;p&gt;Now I will borrow from &lt;a href="http://berkeleysciencereview.com/how-to-become-a-data-scientist-before-you-graduate/"&gt;berkeleysciencereview&lt;/a&gt; (right now, working on item 9 from the link) a more common info-graphic that summarizes this idea.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="infograph" src="http://i.imgur.com/aoz1BJy.jpg"&gt;&lt;/p&gt;
+&lt;h2&gt;In order to be effective, be careful!&lt;/h2&gt;
+&lt;p&gt;You must know the rules of the game that you are playing. In Data Science you need &lt;strong&gt;domain expertise&lt;/strong&gt;. You don't need to be an expert in the field but at least communicate with the other professionals that will help you with insights and what is relevant.&lt;/p&gt;
+&lt;p&gt;You come up with a list of questions, you might attempt answer with data, but before put &lt;em&gt;analytics&lt;/em&gt; effort on it, it is wise to find out what questions, if answered, &lt;strong&gt;add more value to the business&lt;/strong&gt;. Maybe it's the case you don't even have the data yet. Does it worth enhance the accuracy of a model by 0.1% or better move to another questions. Is &lt;em&gt;accuracy&lt;/em&gt; the best way to evaluate the answer to your problem?&lt;/p&gt;
+&lt;p&gt;On &lt;em&gt;prescriptive analytics&lt;/em&gt; you need careful select your optimization metric in order to &lt;strong&gt;match your values&lt;/strong&gt;, otherwise you may end in an undesired point.&lt;/p&gt;
+&lt;p&gt;You need to &lt;strong&gt;know you data&lt;/strong&gt;, the threats to your analysis and limitations. As unfair coins and dices, you data might have bias.&lt;/p&gt;
+&lt;h2&gt;Other perspectives&lt;/h2&gt;
+&lt;p&gt;As a field that is still maturing, you will come across multiple definitions. I will leave you now with some from Columbia professors:&lt;/p&gt;
+&lt;div class="embed-responsive embed-responsive-16by9"&gt;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/a8abc9SgVUM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I borrow this video from edX MOOC I have done "DS101X: Statistical Thinking for Data Science and Analytics"&lt;/p&gt;
+&lt;h2&gt;Final considerations&lt;/h2&gt;
+&lt;p&gt;I have interest in AI in general and one of the main things I like about Data Science is that it brings AI, especially machine learning to daily practical use. Most of times it will be in a pervasive way, but it's there.   &lt;/p&gt;
+&lt;p&gt;I hope now you may have a better idea of one of the main topics of this blog.&lt;/p&gt;</content><category term="data science"></category><category term="intro"></category><category term="beginner"></category><category term="AI"></category><category term="ML"></category></entry><entry><title>Introdução a Ciência de Dados com uma Imagem Mnemônica</title><link href="http://ojon.github.io/pt/aboutDataScience.html" rel="alternate"></link><published>2018-07-23T16:00:00-03:00</published><updated>2018-07-23T16:00:00-03:00</updated><author><name>João Oda</name></author><id>tag:ojon.github.io,2018-07-23:/pt/aboutDataScience.html</id><summary type="html">&lt;!-- Summary: Whats is Data Science about. --&gt;
+
+&lt;p&gt;Outro dia eu encontrei um desenho(claramente inspirado no &lt;a href="https://pt.wikipedia.org/wiki/Mega_Man"&gt;megaman&lt;/a&gt;) curioso na web.&lt;/p&gt;
+&lt;figure width=600&gt;
+  &lt;img src="https://pre00.deviantart.net/c0d7/th/pre/i/2010/134/e/5/rpn_005_dice_man_by_jecht_striker.jpg" alt="DiceMan" &gt;
+  &lt;figcaption style="text-align:right" &gt;drawing créditos de VR-Hyoumaru&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Vamos olhar para essa imagem e fazer algumas associações.&lt;/p&gt;
+&lt;p&gt;A palavra &lt;strong&gt;dados&lt;/strong&gt; pode significar um cubo, simbolo da &lt;strong&gt;teoria da probabilidade&lt;/strong&gt;, um campo da &lt;strong&gt;matemática&lt;/strong&gt; com muitas aplicações e que prove a fundação …&lt;/p&gt;</summary><content type="html">&lt;!-- Summary: Whats is Data Science about. --&gt;
+
+&lt;p&gt;Outro dia eu encontrei um desenho(claramente inspirado no &lt;a href="https://pt.wikipedia.org/wiki/Mega_Man"&gt;megaman&lt;/a&gt;) curioso na web.&lt;/p&gt;
+&lt;figure width=600&gt;
+  &lt;img src="https://pre00.deviantart.net/c0d7/th/pre/i/2010/134/e/5/rpn_005_dice_man_by_jecht_striker.jpg" alt="DiceMan" &gt;
+  &lt;figcaption style="text-align:right" &gt;drawing créditos de VR-Hyoumaru&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Vamos olhar para essa imagem e fazer algumas associações.&lt;/p&gt;
+&lt;p&gt;A palavra &lt;strong&gt;dados&lt;/strong&gt; pode significar um cubo, simbolo da &lt;strong&gt;teoria da probabilidade&lt;/strong&gt;, um campo da &lt;strong&gt;matemática&lt;/strong&gt; com muitas aplicações e que prove a fundação para &lt;strong&gt;estatística&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dados&lt;/strong&gt; também podem significar uma representação de fatos, ideias e observações. Hoje em dia o mais comum é uma representação digital onde tudo se reduz a sequências de 1 e 0, que tipicamente são armazenadas e processadas por dispositivos eletrônicos onde correspondem a níveis de voltagem/corrente ou estados magnéticos em um disco. Isso ocorre com o formulário eletrônico que você preenche ou alguém o faz com suas informações, as transações do seu cartão de crédito, as fotos de sua câmera digital e muitas e muitas outras coisas bem como este post.&lt;/p&gt;
+&lt;p&gt;Eu vou associar o robô com &lt;strong&gt;automação&lt;/strong&gt;  e &lt;strong&gt;computação&lt;/strong&gt; (apesar de que outros campos como a mecatrônica podem vir a sua mente)&lt;/p&gt;
+&lt;p&gt;Agora seja qual for a missão do nosso "homem dados", ela se ocorrerá em um &lt;strong&gt;domínio&lt;/strong&gt;, um &lt;strong&gt;contexto&lt;/strong&gt; e quanto mais ele souber a respeito, melhor será seu desempenho.&lt;/p&gt;
+&lt;p&gt;Apresento-lhes então o campo da &lt;strong&gt;ciência de dados&lt;/strong&gt; e talvez essas associações e uma imagem mental ajude na memorização do conceito, um truque que eu acho útil em muitas situações.&lt;/p&gt;
+&lt;h2&gt;Do que se trata a ciência de dados?&lt;/h2&gt;
+&lt;p&gt;Nos últimos anos o termo &lt;strong&gt;ciência de dados&lt;/strong&gt; emergiu para denominar uma área interdisciplinar de conhecimento. Cientistas de dados e outro profissionais desta área proveem as organizações de análises computacionais sistemáticas de dados:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Uma &lt;strong&gt;&lt;em&gt;análise descritiva&lt;/em&gt;&lt;/strong&gt; pode mostrar revelar insights e apontar informações ocultas nos dados que irão afetar suas decisões.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Uma &lt;strong&gt;&lt;em&gt;análise preditiva&lt;/em&gt;&lt;/strong&gt; faz uso de modelos para prever um resultado que extrapolas as informações que você possue até o momento, em muitos casos isto significar prever o futuro.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Em uma &lt;strong&gt;&lt;em&gt;análise prescritiva&lt;/em&gt;&lt;/strong&gt; você seleciona uma métrica de optimização e os dados são utilizados para receitar quais ações tomar para maximizar sua métrica. Enfatizando em si que as ações em si são o resultado da analise, não o que vai ocorrer no futuro nem o que esta escondido em seus dados.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sob minha perspectiva eu considero que Ciência de Dados se trata de &lt;strong&gt;obter valor a partir dos dados&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;Habilidades&lt;/h2&gt;
+&lt;p&gt;A ciência de dados esta intimamente ligada ao fenômeno &lt;strong&gt;Big Data&lt;/strong&gt; (a quantidade muito maior de dados disponíveis atualmente). Para lidar com quantidades massivas de dados precisamos utilizar ferramentos computacionais guiadas por princípios matemáticos e estatísticos dentro do contexto do negócio que estamos tratando.&lt;/p&gt;
+&lt;p&gt;Agora eu tomei a liberdade de traduzir um infográfico original de &lt;a href="http://berkeleysciencereview.com/how-to-become-a-data-scientist-before-you-graduate/"&gt;berkeleysciencereview&lt;/a&gt; (no momento estou trabalhando no item 9 do link, "construa uma presença online").&lt;/p&gt;
+&lt;p&gt;&lt;img alt="infográfico" src="http://ojon.github.io/images/infograficoCienciaDeDados.jpg"&gt;&lt;/p&gt;
+&lt;!-- - Ciência de dados devido a sua natureza interdisciplinar, requer uma intersecção de habilidades: habilidades computacionais, conhecimento de matemática e estatística, e conhecimento do domínio.
+
+- Habilidades computacionais são necessárias para trabalhar com quantidades massivas de dados que precisam ser adquiridos, limpos e manipulados.
+
+- Conhecimento matemático e estatístico permite os cientistas de dados escolherem métodos apropriados e ferramentas para extrair insights dos dados
+
+- Conhecimento do Domínio é crucial para gerar perguntas motivadoras e hipoteses e para interpretação dos resultados
+
+- Pequisa Tradicional reside na intersecção do conhecimento de matemática e estatística com conhecimento do domínio em um campo científico.
+
+- Machine Learning se origina da combinação de habilidades computacionais com matemática e estatística, mas não requer motivação científica.
+
+- Zona de Perigo! Habilidades computacionais combinadas com conhecimento do domínio sem métodos rigorosos pode resultar em analises incorretas. --&gt;
+
+&lt;h2&gt;Para ser eficaz, seja cuidadoso!&lt;/h2&gt;
+&lt;p&gt;Você precisa saber as regras do jogo que esta jogando. Na ciência de dados você precisa de &lt;strong&gt;conhecimento do domínio&lt;/strong&gt;. Não é necessário ser o maior especialista no assunto mas pelo se comunicar com outros profissionais que vão ajuda-lo com insights e o que é relevante.&lt;/p&gt;
+&lt;p&gt;Você vem com uma lista de questões, que você pode tentar responder com os dados, mas antes de colocar o esforço de uma analise sistemática, é sábio descobrir quais questões se respondidas &lt;strong&gt;agregam mais valor ao negócio&lt;/strong&gt;. Talvez é o caso que você nem possua os dados necessários. Vale a pena aumentar a acurácia de um modelo preditivo em 0.1% ou é melhor tentar responder outra questão. A acurácia é melhor forma de avaliar a resposta do problema?&lt;/p&gt;
+&lt;p&gt;Em &lt;em&gt;analises prescritivas&lt;/em&gt; você precisa escolher cuidadosamente sua métrica de optimização de forma alinhada com os seus valores, caso contrário é possível acabar em uma situação não desejada.&lt;/p&gt;
+&lt;p&gt;É preciso &lt;strong&gt;conhecer seus dados&lt;/strong&gt;, as ameaças de suas analises e suas limitações. Da mesma forma que moedas e dados que você lança para o alto podem ser injustos e enviesados, seus dados nos quais você baseia suas analises podem ser enviesados.&lt;/p&gt;
+&lt;p&gt;Estes são alguns pontos e existem muitos outros que tornam a área ainda mais desafiadora.&lt;/p&gt;
+&lt;h2&gt;Outras Perspectivas&lt;/h2&gt;
+&lt;p&gt;Sendo um campo que ainda amadurecendo você vai se deparar com múltiplas definições. Eu os deixo com um vídeos com alguns professores do professores da universidade de Columbia e suas definições.
+&lt;div class="embed-responsive embed-responsive-16by9"&gt;
+  &lt;iframe width="560" height="315" cc_load_policy=1 hl=pt-br src="https://www.youtube.com/embed/a8abc9SgVUM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Infelizmente o conteúdo é em inglês, mas você pode recorrer ao recurso &lt;em&gt;auto-translate&lt;/em&gt; do youtube.&lt;/p&gt;
+&lt;p&gt;Eu retirei este vídeo de um curso da plataform Edx que eu fiz, "DS101X: Statistical Thinking for Data Science and Analytics"&lt;/p&gt;
+&lt;h2&gt;Considerações Finais&lt;/h2&gt;
+&lt;p&gt;Eu tenho interesse em inteligência artificial de um modo geral e uma coisa que eu gosto com respeito a ciência de dados é que ele traz IA, especialmente o campo de aprendizado de máquina para o uso pratico do dia a dia. Na maioria das vezes isso ocorre de forma pervasiva, sem que se perceba sua presença, mas ela esta lá.&lt;/p&gt;
+&lt;p&gt;Eu espero que agora você tenha um melhor ideia sobre um dos principais tópicos deste blog.&lt;/p&gt;</content><category term="ciência de dados"></category><category term="introdução"></category><category term="iniciante"></category><category term="inteligência artificial"></category></entry></feed>
