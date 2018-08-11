@@ -42,11 +42,23 @@ MARKUP = ('md', 'ipynb')
 
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
 PLUGINS = [
+  'better_code_samples', #not working ...
   'ipynb.markup',
   'i18n_subsites',
-  'tag_cloud'
+  'tag_cloud',
+  'render_math'
 ]
+
 THEME = './pelican-themes/pelican-bootstrap3'
+
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight', 'linenums': 'True'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}
 
 JINJA_ENVIRONMENT = {'extensions': ['jinja2.ext.i18n']}
 I18N_GETTEXT_NEWSTYLE = True
@@ -56,7 +68,7 @@ I18N_SUBSITES = {
             'SITENAME': 'Razões & Refleções Randômicas',
             'LOCALE': 'pt_BR.utf8',            #This is somewhat redundant with DATE_FORMATS, but IMHO more convenient
             'STATIC_PATHS':['images'],
-            'ABOUT_ME': '''Eu sou uma pessoa curiosa com formação multidisciplinar, interessado em resolver problemas e melhorar a vida. Utilizado de técnicas analíticas, computacionais, inteligência artificial (principalmente com o uso de dados) para encontrar uma solução. Eu gosto de ciência e atividades estimulantes (tanto do ponto de vista físico como intelectual). Procuro desenvolvimento pessoal, valorizo saúde e tento seguir um estilo de vida saudável.''',
+            'ABOUT_ME': '''Eu sou uma pessoa curiosa com formação multidisciplinar, interessado em resolver problemas e melhorar a vida. Utilizo de técnicas analíticas, computacionais e inteligência artificial (principalmente com o uso de dados) para encontrar uma solução. Eu gosto de ciência e atividades estimulantes (tanto do ponto de vista físico como intelectual). Procuro desenvolvimento pessoal, valorizo saúde e tento seguir um estilo de vida saudável.''',
             'AVATAR': 'images/profile.jpg',
             'SHARIFF_LANG': 'pt'
             },
@@ -67,7 +79,7 @@ BOOTSTRAP_THEME = 'readable'
 PYGMENTS_STYLE = 'default'
 ABOUT_ME = '''I am a curious person with multidisciplinary background,
  who is interested in solve problems and enhance life.
- I employ analytical, computational, AI (mainly data driven)
+ I employ analytical, computational and AI (mainly data driven)
  techniques to find a solution.
  I like science and stimulating activities (physical and intellectual). I search for personal development , value health and attempt to live a healthy lifestyle.  '''
 
