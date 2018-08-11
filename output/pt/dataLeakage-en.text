@@ -10,7 +10,7 @@ Lang: en
 ![mario_see_data_leakage](/images/leakimg.jpg)
 
 
-In an attempt to organize my projects, I have just refactored an old [data mining project](https://github.com/ojon/MD_Proj) done a few years ago. Originally I used Python for data preparation and feature selection and then with [Weka] (https://www.cs.waikato.ac.nz/ml/weka/) I performed the training, validation and model selection. I reimplemented everything in Python with [sckit-learn] (http://scikit-learn.org/stable/), making use of [_pipelines_](http://scikit-learn.org/stable/modules/pipeline .html # pipeline) and used the opportunity to fix a data leakage issue.
+In an attempt to organize my projects, I have just refactored an old [data mining project](https://github.com/ojon/MD_Proj) done a few years ago. Originally I used Python for data preparation and feature selection and then with [Weka](https://www.cs.waikato.ac.nz/ml/weka/) I performed the training, validation and model selection. I reimplemented everything in Python with [sckit-learn](http://scikit-learn.org/stable/), making use of [_pipelines_](http://scikit-learn.org/stable/modules/pipeline .html # pipeline) and used the opportunity to fix a data leakage issue.
 
 In the context of data science, in a broad sense we have two cases of **data leakage** in predictive models:
 
@@ -127,7 +127,7 @@ The training depends on which features were selected and these were selected usi
 
 Someone tells Mario that to fix this data leak that "allowed" a prediction from random numbers we do not need a pipe wrench, but use the correct methodology and write good code. Therefore, we need to separate a dataset, without any intersection with the validation set, where feature selection and training occurs. As we are performing cross-validation of 5-folds, this will be repeated 5 times, the total data set will be partitioned into 5 folds and each time a fold will be used for validation and the complement for feature selection and training.
 
-Scikit-learn allows us to use the [_pipelines_] feature (http://scikit-learn.org/stable/modules/pipeline.html#pipeline) to implement the processing steps that the data is submitted. The `cross_val_score ()` function is capable of receiving a pipeline as an argument and performing training and cross-validation in k folds. No wonder I implemented the filter in a way compatible with pipelines. So we have the following code:
+Scikit-learn allows us to use the [_pipelines_](http://scikit-learn.org/stable/modules/pipeline.html#pipeline) to implement the processing steps that the data is submitted. The `cross_val_score` function is capable of receiving a pipeline as an argument and performing training and cross-validation in k folds. No wonder I implemented the filter in a way compatible with pipelines. So we have the following code:
 
 ```python
 pipe = Pipeline([

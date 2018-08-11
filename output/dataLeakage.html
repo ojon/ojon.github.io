@@ -13,13 +13,13 @@
 
         <meta name="author" content="João Oda" />
         <meta name="keywords" content="data science,intermediate,AI,ML,feature selection,validation,data mining,scikit-learn" />
-        <meta name="description" content="In an attempt to organize my projects, I have just refactored an old data mining project done a few years ago. Originally I used Python for data preparation and feature selection and then with [Weka] (https://www.cs.waikato.ac.nz/ml/weka/) I performed the training, validation and model …" />
+        <meta name="description" content="In an attempt to organize my projects, I have just refactored an old data mining project done a few years ago. Originally I used Python for data preparation and feature selection and then with Weka I performed the training, validation and model selection. I reimplemented everything in Python with sckit-learn …" />
 
         <meta property="og:site_name" content="Random Reasons & Reflections" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Data leakage pitfalls in data science"/>
         <meta property="og:url" content="/dataLeakage.html"/>
-        <meta property="og:description" content="In an attempt to organize my projects, I have just refactored an old data mining project done a few years ago. Originally I used Python for data preparation and feature selection and then with [Weka] (https://www.cs.waikato.ac.nz/ml/weka/) I performed the training, validation and model …"/>
+        <meta property="og:description" content="In an attempt to organize my projects, I have just refactored an old data mining project done a few years ago. Originally I used Python for data preparation and feature selection and then with Weka I performed the training, validation and model selection. I reimplemented everything in Python with sckit-learn …"/>
         <meta property="article:published_time" content="2018-08-11" />
             <meta property="article:section" content="Data Science" />
             <meta property="article:tag" content="data science" />
@@ -130,7 +130,7 @@ Random Reasons & Reflections            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <!-- Status: draft --><html><head></head><body><p><img alt="mario_see_data_leakage" src="/images/leakimg.jpg"/></p>
-<p>In an attempt to organize my projects, I have just refactored an old <a href="https://github.com/ojon/MD_Proj">data mining project</a> done a few years ago. Originally I used Python for data preparation and feature selection and then with [Weka] (https://www.cs.waikato.ac.nz/ml/weka/) I performed the training, validation and model selection. I reimplemented everything in Python with [sckit-learn] (http://scikit-learn.org/stable/), making use of <a href="http://scikit-learn.org/stable/modules/pipeline .html # pipeline"><em>pipelines</em></a> and used the opportunity to fix a data leakage issue.</p>
+<p>In an attempt to organize my projects, I have just refactored an old <a href="https://github.com/ojon/MD_Proj">data mining project</a> done a few years ago. Originally I used Python for data preparation and feature selection and then with <a href="https://www.cs.waikato.ac.nz/ml/weka/">Weka</a> I performed the training, validation and model selection. I reimplemented everything in Python with <a href="http://scikit-learn.org/stable/">sckit-learn</a>, making use of <a href="http://scikit-learn.org/stable/modules/pipeline .html # pipeline"><em>pipelines</em></a> and used the opportunity to fix a data leakage issue.</p>
 <p>In the context of data science, in a broad sense we have two cases of <strong>data leakage</strong> in predictive models:</p>
 <h2>Leaking Features</h2>
 <p>It occurs when the set of training features has information (typically from the variable we want to predict) that will not be present when we perform the prediction in production environment.</p>
@@ -269,7 +269,7 @@ Random Reasons & Reflections            </a>
 <h3>Fixing data lekage</h3>
 <p><img alt="Mario" src="/images/mario_wanna_fix_leakage.jpg"/></p>
 <p>Someone tells Mario that to fix this data leak that "allowed" a prediction from random numbers we do not need a pipe wrench, but use the correct methodology and write good code. Therefore, we need to separate a dataset, without any intersection with the validation set, where feature selection and training occurs. As we are performing cross-validation of 5-folds, this will be repeated 5 times, the total data set will be partitioned into 5 folds and each time a fold will be used for validation and the complement for feature selection and training.</p>
-<p>Scikit-learn allows us to use the [<em>pipelines</em>] feature (http://scikit-learn.org/stable/modules/pipeline.html#pipeline) to implement the processing steps that the data is submitted. The <code>cross_val_score ()</code> function is capable of receiving a pipeline as an argument and performing training and cross-validation in k folds. No wonder I implemented the filter in a way compatible with pipelines. So we have the following code:</p>
+<p>Scikit-learn allows us to use the <a href="http://scikit-learn.org/stable/modules/pipeline.html#pipeline"><em>pipelines</em></a> to implement the processing steps that the data is submitted. The <code>cross_val_score</code> function is capable of receiving a pipeline as an argument and performing training and cross-validation in k folds. No wonder I implemented the filter in a way compatible with pipelines. So we have the following code:</p>
 <table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -404,25 +404,25 @@ Random Reasons & Reflections            </a>
       <a href="/tag/ai.html">AI</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="/tag/validation.html">validation</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/beginner.html">beginner</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/intermediate.html">intermediate</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/intro.html">intro</a>
-    </li>
-    <li class="list-group-item tag-4">
       <a href="/tag/scikit-learn.html">scikit-learn</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/validation.html">validation</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="/tag/feature-selection.html">feature selection</a>
     </li>
     <li class="list-group-item tag-4">
+      <a href="/tag/beginner.html">beginner</a>
+    </li>
+    <li class="list-group-item tag-4">
       <a href="/tag/data-mining.html">data mining</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/intro.html">intro</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/intermediate.html">intermediate</a>
     </li>
   </ul>
 </li>

@@ -1,19 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Razões &amp; Refleções Randômicas - Ciência de dados</title><link href="https://ojon.github.io/pt/" rel="alternate"></link><link href="https://ojon.github.io/feeds/ciencia-de-dados.atom.xml" rel="self"></link><id>https://ojon.github.io/pt/</id><updated>2018-07-23T16:00:00-03:00</updated><entry><title>Introdução a Ciência de Dados com uma Imagem Mnemônica</title><link href="https://ojon.github.io/pt/aboutDataScience.html" rel="alternate"></link><published>2018-07-23T16:00:00-03:00</published><updated>2018-07-23T16:00:00-03:00</updated><author><name>João Oda</name></author><id>tag:ojon.github.io,2018-07-23:/pt/aboutDataScience.html</id><summary type="html">&lt;!-- Summary: Whats is Data Science about. --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Razões &amp; Refleções Randômicas - Ciência de dados</title><link href="https://ojon.github.io/pt/" rel="alternate"></link><link href="https://ojon.github.io/feeds/ciencia-de-dados.atom.xml" rel="self"></link><id>https://ojon.github.io/pt/</id><updated>2018-08-11T16:00:00-03:00</updated><entry><title>Armadilhas do vazamento de dados em ciência de dados</title><link href="https://ojon.github.io/pt/dataLeakage.html" rel="alternate"></link><published>2018-08-11T16:00:00-03:00</published><updated>2018-08-11T16:00:00-03:00</updated><author><name>João Oda</name></author><id>tag:ojon.github.io,2018-08-11:/pt/dataLeakage.html</id><summary type="html">&lt;!-- Status: draft --&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;&lt;img alt="mario_see_data_leakage" src="/images/leakimg.jpg"/&gt;&lt;/p&gt;
+&lt;p&gt;Na tentativa de organizar meus projetos, acabei de refatorar um antigo &lt;a href="https://github.com/ojon/MD_Proj"&gt;projeto de mineração de dados&lt;/a&gt; que fiz alguns anos atrás. Originalmente utilizei Python para o tratamento dos dados e a seleção de atributos(&lt;em&gt;feature selection&lt;/em&gt;) e depois com &lt;a href="https://www.cs.waikato.ac.nz/ml/weka/"&gt;Weka&lt;/a&gt; realizei o treinamento, validação e seleção dos modelos. Reimplentei tudo …&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</summary><content type="html">&lt;!-- Status: draft --&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;&lt;img alt="mario_see_data_leakage" src="/images/leakimg.jpg"/&gt;&lt;/p&gt;
+&lt;p&gt;Na tentativa de organizar meus projetos, acabei de refatorar um antigo &lt;a href="https://github.com/ojon/MD_Proj"&gt;projeto de mineração de dados&lt;/a&gt; que fiz alguns anos atrás. Originalmente utilizei Python para o tratamento dos dados e a seleção de atributos(&lt;em&gt;feature selection&lt;/em&gt;) e depois com &lt;a href="https://www.cs.waikato.ac.nz/ml/weka/"&gt;Weka&lt;/a&gt; realizei o treinamento, validação e seleção dos modelos. Reimplentei tudo em Python com o &lt;a href="http://scikit-learn.org/stable/"&gt;sckit-learn&lt;/a&gt;, fazendo uso do recurso de &lt;a href="http://scikit-learn.org/stable/modules/pipeline.html#pipeline"&gt;&lt;em&gt;pipelines&lt;/em&gt;&lt;/a&gt; e aproveitei para corrigir um erro de vazamento de dados(&lt;em&gt;data leakage&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;No contexto de ciência de dados, de uma forma ampla temos dois casos de &lt;strong&gt;vazamento de dados&lt;/strong&gt; em modelos preditivos:&lt;/p&gt;
+&lt;h2&gt;Atributos vazados&lt;/h2&gt;
+&lt;p&gt;Ocorre quando o conjunto de atributos de treinamento, possuí informações(tipicamente com origem na variável que queremos prever) que não estarão presentes, quando realizarmos a predição em um ambiente de produção.&lt;/p&gt;
+&lt;h3&gt;Exemplos&lt;/h3&gt;
+&lt;p&gt;Suponha que você deseja criar um modelo preditivo, que prevê se um empréstimo será pago em dia. Tomando um conjunto real de dados como exemplo, no site do &lt;a href="https://www.lendingclub.com/info/download-data.action"&gt;lendingclub&lt;/a&gt; temos uma base de dados disponível, onde uma das colunas "total_rec_late_fee"(Late fees received to date), informa as taxas atrasadas recebidas até o momento. Caso o valor desta coluna seja diferente de zero, é claro que empréstimo não foi pago em dia. Não podemos utilizar esta informação, que somente estará disponível após a concessão do empréstimo, pois um modelo que realiza uma predição previamente ao se realizar um empréstimo, é o que se espera. Nesta mesma fonte de dados, existem muitas outras colunas a serem desconsideradas por motivo semelhante.&lt;/p&gt;
+&lt;p&gt;No contexto de saúde, um banco de dados pode apresentar uma lista de medicamentos, que uma pessoa toma e você esta tentando desenvolver um modelo para realizar um diagnóstico. Deve-se tomar o cuidado de descobrir, se a lista que consta no banco de dados foi atualizada após o diagnóstico do médico, devido a uma prescrição do mesmo ou se eram remédios que a pessoa já tomava previamente devido a alguma condição que possui.&lt;/p&gt;
+&lt;p&gt;Agora um caso que lidei no passado ao trabalhar com algorítimos de negociação. Imagine que seus dados são series temporais, onde &lt;span class="math"&gt;\(x_{t-1}\)&lt;/span&gt; e &lt;span class="math"&gt;\(x_{t+1}\)&lt;/span&gt; são conhecidos, porem &lt;span class="math"&gt;\(x_t\)&lt;/span&gt; é um dado faltante. Você decide então fazer uma interpolação onde &lt;span class="math"&gt;\(x_{t} = \frac{x_{t-1} + x_{t+1}}{2}\)&lt;/span&gt; para completar a lacuna faltante. Esta abordagem compromete a criação de um modelo que utiliza dados até instante t para prever o que ocorre t+1, pois ocorreu vazamento de dados do instante t+1 para o instante prévio t.&lt;/p&gt;
+&lt;h2&gt;Treinamento com exemplos vazados&lt;/h2&gt;
+&lt;p&gt;Ocorre quando, informações provenientes do conjunto de validação, são utilizadas no treinamento do modelo. Você pode pensar que simplesmente particionar o seu conjunto de dados em treino e teste antes de realizar o treinamento é o suficiente. No entanto a situação pode ser um pouco mais complicada e o vazamento ter ocorrido previamente durante a preparação dos dados, seleção de atributos, redução de dimensionalidade e sendo purista até mesmo a visualização ampla dos mesmo.&lt;/p&gt;
+&lt;p&gt;Agora vou exemplificar um processo de seleção de atributos que utilizei no projeto mencionado no início deste post. Este projeto lida com dados de &lt;a href="https://pt.wikibooks.org/wiki/Biologia_celular/Express%C3%A3o_gen%C3%A9tica"&gt;expressão gênica&lt;/a&gt;(&lt;a href="https://pt.wikipedia.org/wiki/Microarranjo_de_DNA"&gt;&lt;em&gt;microarray&lt;/em&gt;&lt;/a&gt;) onde o número de atributos é muito maior que o número de amostras. Neste caso utilizar um número muito grande de atributos acarreta em um modelo cujo treinamento demora um tempo maior, com menos interpretabilidade e mais propenso a uma situação overfitting, com um maior erro de generalização.&lt;/p&gt;
+&lt;h3&gt;Seleção de atributos a partir do teste t&lt;/h3&gt;
+&lt;p&gt;Uma forma simples de realizar a seleção de atributos é através de um filtro baseado no teste-t. Neste versão do filtro, para cada rotulo a ser prevista, o filtro biparticiona as amostra e realiza um teste t. São selecionados os &lt;code&gt;w&lt;/code&gt; atributos, com maior t-valor absoluto para cada rótulo.&lt;/p&gt;
+&lt;p&gt;Eu implementei o filtro em python como um transformer, seguindo o padrão da biblioteca sckit-learn. Isso é feito estendendo-se as classes &lt;code&gt;BaseEstimator&lt;/code&gt;,&lt;code&gt;TransformerMixin&lt;/code&gt; e implementa-se os métodos &lt;code&gt;fit&lt;/code&gt; e &lt;code&gt;transform&lt;/code&gt;. Isto possibilita a utilização em &lt;a href="http://scikit-learn.org/stable/modules/pipeline.html#pipeline"&gt;&lt;em&gt;pipelines&lt;/em&gt;&lt;/a&gt; da mesma biblioteca. Para aplicar o filtro são chamados os dois métodos em sequência, &lt;code&gt;fit&lt;/code&gt; e &lt;code&gt;transform&lt;/code&gt;.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;TtestScoreSelection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BaseEstimator&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;TransformerMixin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;
 
-&lt;p&gt;Outro dia eu encontrei um desenho(claramente inspirado no &lt;a href="https://pt.wikipedia.org/wiki/Mega_Man"&gt;megaman&lt;/a&gt;) curioso na web.&lt;/p&gt;
-&lt;figure width=600&gt;
-  &lt;img src="https://pre00.deviantart.net/c0d7/th/pre/i/2010/134/e/5/rpn_005_dice_man_by_jecht_striker.jpg" alt="DiceMan" &gt;
-  &lt;figcaption style="text-align:right" &gt;drawing créditos de VR-Hyoumaru&lt;/figcaption&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;check_array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;input_shape_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Check that X and y have correct shape&lt;/span&gt;
+        &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;check_X_y&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Store the classes seen during fit&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;labels_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;unique_labels&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tValuesDF&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;labels_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sortedIndexes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;labels_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;labels_&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;sample1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;sample2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;st&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ttest_ind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sample1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sample2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;equal_var&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tValuesDF&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;                      
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sortedIndexes&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tValuesDF&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;by&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                                                   &lt;span class="n"&gt;ascending&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Return the transformer&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# Check is fit had been called&lt;/span&gt;
+        &lt;span class="n"&gt;check_is_fitted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'input_shape_'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Input validation&lt;/span&gt;
+        &lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;check_array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# union of indexes from the top w columns for each label&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;selCols&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unique&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sortedIndexes&lt;/span&gt;&lt;span class="p"&gt;[:][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;flatten&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;selCols&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h3&gt;Predições a partir de números aleatórios&lt;/h3&gt;
+&lt;p&gt;Vamos agora utilizar nosso filtro para selecionar atributos de um forma errônea. Considere o seguinte experimento didático:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Vamos gerar um conjunto aleatório de 100 amostras de 100.000 Atributos.&lt;/li&gt;
+&lt;li&gt;Realizar a redução de atributos por meio do filtro &lt;code&gt;TtestScoreSelection&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Treinar uma SVM utilizando validação cruzada de 5-folds&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table class="highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#random data generation&lt;/span&gt;
+&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rand&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#feature selection&lt;/span&gt;
+&lt;span class="n"&gt;tscoreSel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TtestScoreSelection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;tscoreSel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;selX&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tscoreSel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#SVM training and acuracy estimation by cross-validation.&lt;/span&gt;
+&lt;span class="n"&gt;lr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;svm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SVC&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
+&lt;span class="n"&gt;scores_leak&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;scores_leak&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'score'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cross_val_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;selX&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cv&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;p&gt;Como resultado temos uma acurácia próxima de 100% ao longo dos 5 folds.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="resultados_com_vazamento_de_dados" src="/images/scores_with_leak.png"/&gt;&lt;/p&gt;
+&lt;p&gt;Como isto é possível??? Realizar predições com acurácia próxima de 100%, a partir de números aleatórios?!&lt;/p&gt;
+&lt;p&gt;Se analisarmos cuidadosamente nosso procedimentos podemos observar que durante o passo 2, a seleção de variáveis ocorreu utilizando todo conjunto de dados. Como nosso filtro faz uso dos rótulos da classes para particionar as amostras e realizar o teste, nessa etapa propagamos indiretamente informações do conjunto de dados que futuramente será utilizado para validação para o conjunto de treino.&lt;/p&gt;
+&lt;p&gt;O treinamento depende de quais atributos foram selecionados e estes foram selecionados utilizando inclusive informações relevantes do conjunto do teste. Temos assim um treinamento com exemplos vazados.&lt;/p&gt;
+&lt;h3&gt;Corrigindo o vazamento de dados.&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Mario" src="/images/mario_wanna_fix_leakage.jpg"/&gt;&lt;/p&gt;
+&lt;p&gt;Alguém avise o Mario que para corrigir este vazamento de dados que "permitiu" uma previsão a partir de números aleatórios não necessitamos de uma chave de grifo, mas utilizar a metodologia correta e escrever um bom código. Sendo assim, precisamos separar um conjunto de dados, sem qualquer intersecção com o conjunto de validação, onde a seleção de atributos e o treinamento ocorrem. Como estamos realizando validação cruzada de 5-folds, isto se repetirá 5 vezes, o conjunto total de dados será particionado em 5 folds e cada vez um fold será utilizado para validação e o complemento para seleção de atributos e treinamento.&lt;/p&gt;
+&lt;p&gt;O scikit-learn nos permite utilizar o recurso de &lt;a href="http://scikit-learn.org/stable/modules/pipeline.html#pipeline"&gt;&lt;em&gt;pipelines&lt;/em&gt;&lt;/a&gt; para implementar os passos de processamento que os dados são submetidos. A função &lt;code&gt;cross_val_score()&lt;/code&gt; é capaz de receber um pipeline como argumento e realizar o treinamento e a validação cruzada em k folds. Não é a toa que implementei o filtro de forma compatível com pipelines. Assim o código fica:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pipe&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Pipeline&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'featureSelection'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;TtestScoreSelection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'classify'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;svm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SVC&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
+&lt;span class="n"&gt;scores&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;scores&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'score'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cross_val_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pipe&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cv&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;p&gt;O resultado agora:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="resultados_sem_vazamento_de_dados" src="/images/scores_without_leak.png"/&gt;&lt;/p&gt;
+&lt;p&gt;Como de se esperar, afinal não se pode esperar nada alem de uma acurácia em torno de 50% para uma classificação binária a partir de dados aleatórios.&lt;/p&gt;
+&lt;h2&gt;Considerações Finais&lt;/h2&gt;
+&lt;p&gt;Vazamentos de dados podem acarretam em surpresas desagradáveis, como modelos que performam de maneira superior em ambiente de desenvolvimento do que em produção. Sempre fique atento, pois sempre o vazamento de dados nem sempre estará explicitamente exposto.&lt;/p&gt;
+&lt;p&gt;Um post similar que trata do treinamento vazado com uma abordagem em R pode ser encontrado no blog de &lt;a href="https://johanndejong.wordpress.com/2017/08/06/feature-selection-cross-validation-and-data-leakage/"&gt;Johann de Jong&lt;/a&gt;&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="ciência de dados"></category><category term="seleção de atributos"></category><category term="validação"></category><category term="mineração de dados"></category><category term="scikit-learn"></category><category term="intermediário"></category><category term="aprendizado de máquina"></category><category term="inteligência artificial"></category></entry><entry><title>Introdução a Ciência de Dados com uma Imagem Mnemônica</title><link href="https://ojon.github.io/pt/aboutDataScience.html" rel="alternate"></link><published>2018-07-23T16:00:00-03:00</published><updated>2018-07-23T16:00:00-03:00</updated><author><name>João Oda</name></author><id>tag:ojon.github.io,2018-07-23:/pt/aboutDataScience.html</id><summary type="html">&lt;!-- Summary: Whats is Data Science about. --&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;Outro dia eu encontrei um desenho(claramente inspirado no &lt;a href="https://pt.wikipedia.org/wiki/Mega_Man"&gt;megaman&lt;/a&gt;) curioso na web.&lt;/p&gt;
+&lt;figure width="600"&gt;
+  &lt;img alt="DiceMan" src="https://pre00.deviantart.net/c0d7/th/pre/i/2010/134/e/5/rpn_005_dice_man_by_jecht_striker.jpg"/&gt;
+  &lt;figcaption style="text-align:right"&gt;drawing créditos de VR-Hyoumaru&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Vamos olhar para essa imagem e fazer algumas associações.&lt;/p&gt;
-&lt;p&gt;A palavra &lt;strong&gt;dados&lt;/strong&gt; pode significar um cubo, simbolo da &lt;strong&gt;teoria da probabilidade&lt;/strong&gt;, um campo da &lt;strong&gt;matemática&lt;/strong&gt; com muitas aplicações e que prove a fundação …&lt;/p&gt;</summary><content type="html">&lt;!-- Summary: Whats is Data Science about. --&gt;
-
-&lt;p&gt;Outro dia eu encontrei um desenho(claramente inspirado no &lt;a href="https://pt.wikipedia.org/wiki/Mega_Man"&gt;megaman&lt;/a&gt;) curioso na web.&lt;/p&gt;
-&lt;figure width=600&gt;
-  &lt;img src="https://pre00.deviantart.net/c0d7/th/pre/i/2010/134/e/5/rpn_005_dice_man_by_jecht_striker.jpg" alt="DiceMan" &gt;
-  &lt;figcaption style="text-align:right" &gt;drawing créditos de VR-Hyoumaru&lt;/figcaption&gt;
+&lt;p&gt;A palavra &lt;strong&gt;dados&lt;/strong&gt; pode significar um cubo, simbolo da &lt;strong&gt;teoria da probabilidade&lt;/strong&gt;, um campo da &lt;strong&gt;matemática&lt;/strong&gt; com muitas aplicações e que prove a fundação …&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</summary><content type="html">&lt;!-- Summary: Whats is Data Science about. --&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;Outro dia eu encontrei um desenho(claramente inspirado no &lt;a href="https://pt.wikipedia.org/wiki/Mega_Man"&gt;megaman&lt;/a&gt;) curioso na web.&lt;/p&gt;
+&lt;figure width="600"&gt;
+  &lt;img alt="DiceMan" src="https://pre00.deviantart.net/c0d7/th/pre/i/2010/134/e/5/rpn_005_dice_man_by_jecht_striker.jpg"/&gt;
+  &lt;figcaption style="text-align:right"&gt;drawing créditos de VR-Hyoumaru&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Vamos olhar para essa imagem e fazer algumas associações.&lt;/p&gt;
@@ -39,7 +253,7 @@
 &lt;h2&gt;Habilidades&lt;/h2&gt;
 &lt;p&gt;A ciência de dados esta intimamente ligada ao fenômeno &lt;strong&gt;Big Data&lt;/strong&gt; (a quantidade muito maior de dados disponíveis atualmente). Para lidar com quantidades massivas de dados precisamos utilizar ferramentos computacionais guiadas por princípios matemáticos e estatísticos dentro do contexto do negócio que estamos tratando.&lt;/p&gt;
 &lt;p&gt;Agora eu tomei a liberdade de traduzir um infográfico original de &lt;a href="http://berkeleysciencereview.com/how-to-become-a-data-scientist-before-you-graduate/"&gt;berkeleysciencereview&lt;/a&gt; (no momento estou trabalhando no item 9 do link, "construa uma presença online").&lt;/p&gt;
-&lt;p&gt;&lt;img alt="infográfico" src="https://ojon.github.io/pt/images/infograficoCienciaDeDados.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="infográfico" src="https://ojon.github.io/pt/images/infograficoCienciaDeDados.jpg"/&gt;&lt;/p&gt;
 &lt;!-- - Ciência de dados devido a sua natureza interdisciplinar, requer uma intersecção de habilidades: habilidades computacionais, conhecimento de matemática e estatística, e conhecimento do domínio.
 
 - Habilidades computacionais são necessárias para trabalhar com quantidades massivas de dados que precisam ser adquiridos, limpos e manipulados.
@@ -62,11 +276,11 @@
 &lt;p&gt;Estes são alguns pontos e existem muitos outros que tornam a área ainda mais desafiadora.&lt;/p&gt;
 &lt;h2&gt;Outras Perspectivas&lt;/h2&gt;
 &lt;p&gt;Sendo um campo que ainda amadurecendo você vai se deparar com múltiplas definições. Eu os deixo com um vídeos com alguns professores do professores da universidade de Columbia e suas definições.
-&lt;div class="embed-responsive embed-responsive-16by9"&gt;
-  &lt;iframe width="560" height="315" cc_load_policy=1 hl=pt-br src="https://www.youtube.com/embed/a8abc9SgVUM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;&lt;/p&gt;
+&lt;/p&gt;&lt;div class="embed-responsive embed-responsive-16by9"&gt;
+  &lt;iframe allow="autoplay; encrypted-media" allowfullscreen="" cc_load_policy="1" frameborder="0" height="315" hl="pt-br" src="https://www.youtube.com/embed/a8abc9SgVUM" width="560"&gt;&lt;/iframe&gt;
+&lt;/div&gt;&lt;p&gt;&lt;/p&gt;
 &lt;p&gt;Infelizmente o conteúdo é em inglês, mas você pode recorrer ao recurso &lt;em&gt;auto-translate&lt;/em&gt; do youtube.&lt;/p&gt;
 &lt;p&gt;Eu retirei este vídeo de um curso da plataform Edx que eu fiz, "DS101X: Statistical Thinking for Data Science and Analytics"&lt;/p&gt;
 &lt;h2&gt;Considerações Finais&lt;/h2&gt;
 &lt;p&gt;Eu tenho interesse em inteligência artificial de um modo geral e uma coisa que eu gosto com respeito a ciência de dados é que ele traz IA, especialmente o campo de aprendizado de máquina para o uso pratico do dia a dia. Na maioria das vezes isso ocorre de forma pervasiva, sem que se perceba sua presença, mas ela esta lá.&lt;/p&gt;
-&lt;p&gt;Eu espero que agora você tenha um melhor ideia sobre um dos principais tópicos deste blog.&lt;/p&gt;</content><category term="ciência de dados"></category><category term="introdução"></category><category term="iniciante"></category><category term="inteligência artificial"></category></entry></feed>
+&lt;p&gt;Eu espero que agora você tenha um melhor ideia sobre um dos principais tópicos deste blog.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</content><category term="ciência de dados"></category><category term="introdução"></category><category term="iniciante"></category><category term="inteligência artificial"></category></entry></feed>
