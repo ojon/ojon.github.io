@@ -65,7 +65,7 @@ I18N_GETTEXT_NEWSTYLE = True
 
 I18N_SUBSITES = {
         'pt': {
-            'SITENAME': 'Razões & Refleções Randômicas',
+            'SITENAME': 'Razões & Reflexões Randômicas',
             'LOCALE': 'pt_BR.utf8',            #This is somewhat redundant with DATE_FORMATS, but IMHO more convenient
             'STATIC_PATHS':['images'],
             'ABOUT_ME': '''Eu sou uma pessoa curiosa com formação multidisciplinar, interessado em resolver problemas e melhorar a vida. Utilizo de técnicas analíticas, computacionais e inteligência artificial (principalmente com o uso de dados) para encontrar uma solução. Eu gosto de ciência e atividades estimulantes (tanto do ponto de vista físico como intelectual). Procuro desenvolvimento pessoal, valorizo saúde e tento seguir um estilo de vida saudável.''',
